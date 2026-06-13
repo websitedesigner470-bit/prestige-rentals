@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestige Rentals | Luxury Car Rental Melbourne</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gold-glow:hover {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            border-color: #d4af37;
+        }
+        .bg-dark-mesh {
+            background-color: #0a0a0a;
+            background-image: radial-gradient(at 0% 0%, rgba(20, 20, 20, 0.8) 0, transparent 50%), 
+                              radial-gradient(at 50% 0%, rgba(212, 175, 55, 0.05) 0, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-dark-mesh text-gray-100 font-sans antialiased selection:bg-amber-500 selection:text-black">
+
+    <!-- Navigation -->
+    <nav class="border-b border-gray-900 bg-black/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-xl font-tracking-widest font-black text-white">PRESTIGE<span class="text-amber-500">.</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium text-gray-400">
+                <a href="#" class="hover:text-amber-500 transition">Our Fleet</a>
+                <a href="#" class="hover:text-amber-500 transition">Services</a>
+                <a href="#" class="hover:text-amber-500 transition">Contact</a>
+            </div>
+            <div>
+                <a href="#booking-form" class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-5 py-2.5 rounded-lg text-sm transition tracking-wider uppercase">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Content -->
+    <header class="relative max-w-7xl mx-auto px-6 pt-16 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-6 space-y-6">
+            <span class="text-amber-500 text-xs font-bold tracking-widest uppercase bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Melbourne's Elite Fleet</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-none">
+                Drive The <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Unattainable.</span>
+            </h1>
+            <p class="text-gray-400 text-lg max-w-lg">
+                Experience unparalleled performance and status. No shortcuts, no compromises—just pure exotic engineering at your command.
+            </p>
+        </div>
+
+        <!-- Interactive Form Structure -->
+        <div id="booking-form" class="lg:col-span-6 bg-[#121212] border border-gray-800 p-8 rounded-2xl shadow-2xl space-y-6">
+            <h3 class="text-xl font-bold text-white tracking-wide">Check Fleet Availability</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label class="text-xs uppercase tracking-wider text-gray-500 font-bold">Pick-up Date</label>
+                    <input type="date" class="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs uppercase tracking-wider text-gray-500 font-bold">Return Date</label>
+                    <input type="date" class="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition">
+                </div>
+            </div>
+            <button class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-black py-4 rounded-xl tracking-widest uppercase transition transform active:scale-[0.98]">
+                Search Available Inventory
+            </button>
+        </div>
+    </header>
+
+    <!-- Grid Layout -->
+    <main class="max-w-7xl mx-auto px-6 py-16 border-t border-gray-900">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-[#111] border border-gray-800/80 rounded-2xl overflow-hidden transition-all duration-300 gold-glow flex flex-col justify-between">
+                <div class="relative bg-neutral-900 aspect-video flex items-center justify-center overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1520050206274-a1ae446cb3cc?auto=format&fit=crop&w=800&q=80" alt="Mercedes Benz G-Class AMG" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition duration-500">
+                    <span class="absolute top-4 right-4 bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/30 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-md">V8 Twin-Turbo</span>
+                </div>
+                <div class="p-6 space-y-4">
+                    <h3 class="text-xl font-bold text-white tracking-wide">Mercedes-Benz G63 AMG</h3>
+                    <div class="grid grid-cols-3 gap-2 py-2 border-y border-gray-900 text-center">
+                        <div class="bg-black/40 p-2 rounded-lg"><span class="block text-[10px] text-gray-500">Power</span><span class="text-xs font-bold text-gray-300">577 HP</span></div>
+                        <div class="bg-black/40 p-2 rounded-lg"><span class="block text-[10px] text-gray-500">0-100 km/h</span><span class="text-xs font-bold text-gray-300">4.5s</span></div>
+                        <div class="bg-black/40 p-2 rounded-lg"><span class="block text-[10px] text-gray-500">Seats</span><span class="text-xs font-bold text-gray-300">5 Adults</span></div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 border-t border-gray-900/50 mt-4 flex items-center justify-between">
+                    <div><span class="text-xl font-black text-white">$850 <span class="text-xs font-normal text-gray-400">AUD</span></span></div>
+                    <a href="#booking-form" class="bg-transparent border border-gray-700 hover:border-amber-500 hover:bg-amber-500 hover:text-black font-bold text-xs uppercase tracking-widest px-4 py-3 rounded-lg transition duration-300">Book Vehicle</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
