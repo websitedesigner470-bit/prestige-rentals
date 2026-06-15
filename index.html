@@ -1,97 +1,413 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestige Rentals | Luxury Car Rental Melbourne</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- FontAwesome for Icons -->
+    <title>Prestige Rentals | Ultra-Luxury Mercedes Fleet Melbourne</title>
+    <!-- Premium Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .gold-glow:hover {
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            border-color: #d4af37;
+    <!-- Tailwind CSS Production Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for Next-Gen Interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        gold: {
+                            50: '#fbf8f3',
+                            100: '#f4ebd8',
+                            400: '#d4af37',
+                            500: '#c5a028',
+                            600: '#aa821c',
+                        },
+                        platinum: '#e5e5e5',
+                    }
+                }
+            }
         }
-        .bg-dark-mesh {
-            background-color: #0a0a0a;
-            background-image: radial-gradient(at 0% 0%, rgba(20, 20, 20, 0.8) 0, transparent 50%), 
-                              radial-gradient(at 50% 0%, rgba(212, 175, 55, 0.05) 0, transparent 50%);
+    </script>
+    <style>
+        .premium-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
     </style>
 </head>
-<body class="bg-dark-mesh text-gray-100 font-sans antialiased selection:bg-amber-500 selection:text-black">
+<body class="bg-[#0b0c10] text-gray-100 font-sans selection:bg-gold-400 selection:text-black overflow-x-hidden" x-data="{ mobileMenu: false, bookingModal: false, selectedCar: '' }">
 
-    <!-- Navigation -->
-    <nav class="border-b border-gray-900 bg-black/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="text-xl font-tracking-widest font-black text-white">PRESTIGE<span class="text-amber-500">.</span></span>
-            </div>
-            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium text-gray-400">
-                <a href="#" class="hover:text-amber-500 transition">Our Fleet</a>
-                <a href="#" class="hover:text-amber-500 transition">Services</a>
-                <a href="#" class="hover:text-amber-500 transition">Contact</a>
-            </div>
-            <div>
-                <a href="#booking-form" class="bg-amber-500 hover:bg-amber-600 text-black font-bold px-5 py-2.5 rounded-lg text-sm transition tracking-wider uppercase">Book Now</a>
-            </div>
-        </div>
-    </nav>
+    <!-- ELITE FLOATING HEADER -->
+    <header class="fixed top-0 w-full z-50 bg-[#0b0c10]/70 premium-blur border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <!-- Brand Mark -->
+            <a href="#" class="flex flex-col tracking-widest group">
+                <span class="font-serif text-2xl lg:text-3xl font-light text-white group-hover:text-gold-400 transition-colors duration-300">PRESTIGE</span>
+                <span class="text-[10px] uppercase font-semibold text-gold-400 -mt-1 tracking-[0.4em]">RENTALS</span>
+            </a>
 
-    <!-- Hero Content -->
-    <header class="relative max-w-7xl mx-auto px-6 pt-16 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-6 space-y-6">
-            <span class="text-amber-500 text-xs font-bold tracking-widest uppercase bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Melbourne's Elite Fleet</span>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-none">
-                Drive The <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Unattainable.</span>
-            </h1>
-            <p class="text-gray-400 text-lg max-w-lg">
-                Experience unparalleled performance and status. No shortcuts, no compromises—just pure exotic engineering at your command.
-            </p>
-        </div>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-10 text-xs uppercase tracking-[0.2em] font-medium text-gray-400">
+                <a href="#fleet" class="hover:text-white transition-colors">The Fleet</a>
+                <a href="#experience" class="hover:text-white transition-colors">The Experience</a>
+                <a href="#concierge" class="hover:text-white transition-colors">Concierge</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </nav>
 
-        <!-- Interactive Form Structure -->
-        <div id="booking-form" class="lg:col-span-6 bg-[#121212] border border-gray-800 p-8 rounded-2xl shadow-2xl space-y-6">
-            <h3 class="text-xl font-bold text-white tracking-wide">Check Fleet Availability</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="space-y-2">
-                    <label class="text-xs uppercase tracking-wider text-gray-500 font-bold">Pick-up Date</label>
-                    <input type="date" class="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition">
-                </div>
-                <div class="space-y-2">
-                    <label class="text-xs uppercase tracking-wider text-gray-500 font-bold">Return Date</label>
-                    <input type="date" class="w-full bg-black border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition">
-                </div>
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="tel:+61390000000" class="text-xs text-gray-400 tracking-wider hover:text-white transition-colors">
+                    <i class="fa-solid fa-phone text-gold-400 mr-2"></i>+61 3 9000 0000
+                </a>
+                <a href="#fleet" class="border border-gold-400/40 px-6 py-3 text-xs uppercase tracking-widest text-gold-400 hover:bg-gold-400 hover:text-black transition-all duration-500 font-medium">
+                    Browse Fleet
+                </a>
             </div>
-            <button class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-black py-4 rounded-xl tracking-widest uppercase transition transform active:scale-[0.98]">
-                Search Available Inventory
+
+            <!-- Mobile Trigger -->
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-white focus:outline-none">
+                <i class="fa-solid text-xl" :class="mobileMenu ? 'fa-xmark' : 'fa-bars'"></i>
             </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div x-show="mobileMenu" x-transition.opacity class="fixed inset-0 top-24 bg-[#0b0c10] z-40 px-6 py-12 md:hidden flex flex-col space-y-8 text-center text-xl font-serif">
+            <a @click="mobileMenu = false" href="#fleet" class="text-gray-300 hover:text-gold-400">The Fleet</a>
+            <a @click="mobileMenu = false" href="#experience" class="text-gray-300 hover:text-gold-400">The Experience</a>
+            <a @click="mobileMenu = false" href="#concierge" class="text-gray-300 hover:text-gold-400">Concierge</a>
+            <a @click="mobileMenu = false" href="#contact" class="text-gray-300 hover:text-gold-400">Contact</a>
+            <hr class="border-white/5 w-1/4 mx-auto">
+            <a href="tel:+61390000000" class="text-sm tracking-widest text-gold-400"><i class="fa-solid fa-phone mr-2"></i> +61 3 9000 0000</a>
         </div>
     </header>
 
-    <!-- Grid Layout -->
-    <main class="max-w-7xl mx-auto px-6 py-16 border-t border-gray-900">
+    <!-- CINEMATIC HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+        <!-- Visual Backdrop (High end fallback if video omitted) -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=2000" alt="Mercedes AMG" class="w-full h-full object-cover scale-105 filter brightness-[0.25] contrast-[1.1]">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0c10] via-transparent to-black/50"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center mt-12">
+            <span class="inline-block uppercase tracking-[0.4em] text-xs font-semibold text-gold-400 mb-4 bg-gold-400/10 px-4 py-1.5 border border-gold-400/20">
+                Melbourne's Premier Chauffeur & Self-Drive
+            </span>
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white mb-6 leading-[1.15]">
+                Command Attention. <br><span class="italic text-gold-100 font-normal">Experience Absolute Class.</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-gray-400 text-sm sm:text-base tracking-wide font-light mb-12 leading-relaxed">
+                An elite fleet of Tier-1 Mercedes-Benz vehicles curated for corporate moguls, red-carpet events, and connoisseurs of unparalleled automotive engineering in Victoria.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#fleet" class="w-full sm:w-auto bg-gold-400 text-black px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-white transition-all duration-300 shadow-xl shadow-gold-500/10">
+                    Reserve Your Fleet
+                </a>
+                <a href="#experience" class="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-white/10 transition-all duration-300 premium-blur">
+                    The Bespoke Experience
+                </a>
+            </div>
+        </div>
+
+        <!-- Subtle Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-center animate-bounce">
+            <span class="text-[9px] uppercase tracking-[0.3em] text-gray-500 block mb-2">Scroll to discover</span>
+            <i class="fa-solid fa-chevron-down text-gold-400 text-xs"></i>
+        </div>
+    </section>
+
+    <!-- BUSINESS METRICS STRIP -->
+    <section class="bg-[#0f111a] border-y border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <p class="font-serif text-3xl text-white font-light mb-1">100%</p>
+                <p class="text-[10px] uppercase tracking-widest text-gold-400">Mercedes Elite Fleet</p>
+            </div>
+            <div>
+                <p class="font-serif text-3xl text-white font-light mb-1">Melbourne</p>
+                <p class="text-[10px] uppercase tracking-widest text-gold-400">Wide Delivery Available</p>
+            </div>
+            <div>
+                <p class="font-serif text-3xl text-white font-light mb-1">24/7</p>
+                <p class="text-[10px] uppercase tracking-widest text-gold-400">VIP White Glove Concierge</p>
+            </div>
+            <div>
+                <p class="font-serif text-3xl text-white font-light mb-1">5-Star</p>
+                <p class="text-[10px] uppercase tracking-widest text-gold-400">Client Luxury Rating</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE FLEET COMPONENT -->
+    <section id="fleet" class="py-24 max-w-7xl mx-auto px-6" x-data="{ activeTab: 'all' }">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold block mb-2">The Collection</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white">Select Your Masterpiece</h2>
+            </div>
+            <!-- Category Filter Tabs -->
+            <div class="flex space-x-4 mt-6 md:mt-0 text-[10px] uppercase tracking-widest font-semibold overflow-x-auto pb-2">
+                <button @click="activeTab = 'all'" :class="activeTab === 'all' ? 'text-gold-400 border-gold-400' : 'text-gray-500 border-transparent'" class="border-b-2 px-2 py-1 transition-all">All Vehicles</button>
+                <button @click="activeTab = 'suv'" :class="activeTab === 'suv' ? 'text-gold-400 border-gold-400' : 'text-gray-500 border-transparent'" class="border-b-2 px-2 py-1 transition-all">Suvs</button>
+                <button @click="activeTab = 'sedan'" :class="activeTab === 'sedan' ? 'text-gold-400 border-gold-400' : 'text-gray-500 border-transparent'" class="border-b-2 px-2 py-1 transition-all">Sedans & Coupes</button>
+            </div>
+        </div>
+
+        <!-- Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-[#111] border border-gray-800/80 rounded-2xl overflow-hidden transition-all duration-300 gold-glow flex flex-col justify-between">
-                <div class="relative bg-neutral-900 aspect-video flex items-center justify-center overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1520050206274-a1ae446cb3cc?auto=format&fit=crop&w=800&q=80" alt="Mercedes Benz G-Class AMG" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition duration-500">
-                    <span class="absolute top-4 right-4 bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/30 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-md">V8 Twin-Turbo</span>
+            
+            <!-- CAR CARD 1: G WAGON -->
+            <div x-show="activeTab === 'all' || activeTab === 'suv'" x-transition class="bg-[#0f111a] border border-white/5 group hover:border-gold-400/30 transition-all duration-500 overflow-hidden flex flex-col justify-between">
+                <div class="relative overflow-hidden aspect-[16/10]">
+                    <img src="https://images.unsplash.com/photo-1520050206274-a1ae446cb3cc?auto=format&fit=crop&q=80&w=800" alt="Mercedes G-Wagon" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute top-4 right-4 bg-black/70 premium-blur px-3 py-1 text-[10px] uppercase font-semibold text-gold-400 tracking-wider">Top Class</div>
                 </div>
-                <div class="p-6 space-y-4">
-                    <h3 class="text-xl font-bold text-white tracking-wide">Mercedes-Benz G63 AMG</h3>
-                    <div class="grid grid-cols-3 gap-2 py-2 border-y border-gray-900 text-center">
-                        <div class="bg-black/40 p-2 rounded-lg"><span class="block text-[10px] text-gray-500">Power</span><span class="text-xs font-bold text-gray-300">577 HP</span></div>
-                        <div class="bg-black/40 p-2 rounded-lg"><span class="block text-[10px] text-gray-500">0-100 km/h</span><span class="text-xs font-bold text-gray-300">4.5s</span></div>
-                        <div class="bg-black/40 p-2 rounded-lg"><span class="block text-[10px] text-gray-500">Seats</span><span class="text-xs font-bold text-gray-300">5 Adults</span></div>
+                <div class="p-6">
+                    <h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors duration-300">Mercedes-AMG G 63</h3>
+                    <p class="text-xs text-gray-500 tracking-wider uppercase mb-6">Iconic Power & Status</p>
+                    <div class="grid grid-cols-3 gap-2 border-y border-white/5 py-4 text-center text-xs text-gray-400 mb-6">
+                        <div><i class="fa-solid fa-gauge text-gold-400 mb-1 block"></i> V8 Biturbo</div>
+                        <div><i class="fa-solid fa-chair text-gold-400 mb-1 block"></i> 5 Seats</div>
+                        <div><i class="fa-solid fa-bolt text-gold-400 mb-1 block"></i> 430 kW</div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-500 block uppercase tracking-wider">Daily Rate</span>
+                            <span class="font-serif text-lg text-white">$950 <span class="text-xs text-gray-400 font-sans">AUD</span></span>
+                        </div>
+                        <button @click="bookingModal = true; selectedCar = 'Mercedes-AMG G 63'" class="bg-white/5 border border-white/10 hover:bg-gold-400 hover:text-black hover:border-gold-400 px-5 py-3 text-[10px] uppercase tracking-widest font-semibold transition-all duration-300">
+                            Book Range
+                        </button>
                     </div>
                 </div>
-                <div class="p-6 pt-0 border-t border-gray-900/50 mt-4 flex items-center justify-between">
-                    <div><span class="text-xl font-black text-white">$850 <span class="text-xs font-normal text-gray-400">AUD</span></span></div>
-                    <a href="#booking-form" class="bg-transparent border border-gray-700 hover:border-amber-500 hover:bg-amber-500 hover:text-black font-bold text-xs uppercase tracking-widest px-4 py-3 rounded-lg transition duration-300">Book Vehicle</a>
+            </div>
+
+            <!-- CAR CARD 2: S CLASS -->
+            <div x-show="activeTab === 'all' || activeTab === 'sedan'" x-transition class="bg-[#0f111a] border border-white/5 group hover:border-gold-400/30 transition-all duration-500 overflow-hidden flex flex-col justify-between">
+                <div class="relative overflow-hidden aspect-[16/10]">
+                    <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&q=80&w=800" alt="Mercedes S Class" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute top-4 right-4 bg-black/70 premium-blur px-3 py-1 text-[10px] uppercase font-semibold text-gold-400 tracking-wider">Chauffeur Choice</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors duration-300">Mercedes-Benz S-Class Long</h3>
+                    <p class="text-xs text-gray-500 tracking-wider uppercase mb-6">The Pinnacle of First Class Travel</p>
+                    <div class="grid grid-cols-3 gap-2 border-y border-white/5 py-4 text-center text-xs text-gray-400 mb-6">
+                        <div><i class="fa-solid fa-couch text-gold-400 mb-1 block"></i> Executive</div>
+                        <div><i class="fa-solid fa-snowflake text-gold-400 mb-1 block"></i> Climate</div>
+                        <div><i class="fa-solid fa-wifi text-gold-400 mb-1 block"></i> Onboard</div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-500 block uppercase tracking-wider">Daily Rate</span>
+                            <span class="font-serif text-lg text-white">$750 <span class="text-xs text-gray-400 font-sans">AUD</span></span>
+                        </div>
+                        <button @click="bookingModal = true; selectedCar = 'Mercedes-Benz S-Class'" class="bg-white/5 border border-white/10 hover:bg-gold-400 hover:text-black hover:border-gold-400 px-5 py-3 text-[10px] uppercase tracking-widest font-semibold transition-all duration-300">
+                            Book Range
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAR CARD 3: AMG GT -->
+            <div x-show="activeTab === 'all' || activeTab === 'sedan'" x-transition class="bg-[#0f111a] border border-white/5 group hover:border-gold-400/30 transition-all duration-500 overflow-hidden flex flex-col justify-between">
+                <div class="relative overflow-hidden aspect-[16/10]">
+                    <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800" alt="Mercedes AMG GT" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute top-4 right-4 bg-black/70 premium-blur px-3 py-1 text-[10px] uppercase font-semibold text-gold-400 tracking-wider">Trackbred</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors duration-300">Mercedes-AMG GT Coupe</h3>
+                    <p class="text-xs text-gray-500 tracking-wider uppercase mb-6">Pure Thoroughbred Performance</p>
+                    <div class="grid grid-cols-3 gap-2 border-y border-white/5 py-4 text-center text-xs text-gray-400 mb-6">
+                        <div><i class="fa-solid fa-gauge-high text-gold-400 mb-1 block"></i> 312 km/h</div>
+                        <div><i class="fa-solid fa-wind text-gold-400 mb-1 block"></i> Aero Dynamic</div>
+                        <div><i class="fa-solid fa-music text-gold-400 mb-1 block"></i> Burmester</div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-500 block uppercase tracking-wider">Daily Rate</span>
+                            <span class="font-serif text-lg text-white">$1,200 <span class="text-xs text-gray-400 font-sans">AUD</span></span>
+                        </div>
+                        <button @click="bookingModal = true; selectedCar = 'Mercedes-AMG GT R'" class="bg-white/5 border border-white/10 hover:bg-gold-400 hover:text-black hover:border-gold-400 px-5 py-3 text-[10px] uppercase tracking-widest font-semibold transition-all duration-300">
+                            Book Range
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PREMIUM EXPERIENCE DIVIDER BLOCK -->
+    <section id="experience" class="bg-[#0f111a] py-24 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600" alt="Interior Details" class="w-full h-72 object-cover border border-white/5 filter brightness-75">
+                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=600" alt="Chauffeur" class="w-full h-72 object-cover border border-white/5 mt-8 filter brightness-75">
+            </div>
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold block mb-2">Bespoke Inclusions</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-light text-white mb-6 leading-tight">We Redefine What Executive Travel Means Inside Victoria.</h2>
+                <p class="text-gray-400 text-sm font-light leading-relaxed mb-8">
+                    Every luxury rental includes private airport tarmac delivery upon request, pristine presentation detailing, and real-time tracking setups. Whether you opt for an unbranded fleet vehicle for dynamic low-profile travel, or fully loaded high-visibility AMGs, our standard is perfection.
+                </p>
+                <div class="space-y-4 text-sm tracking-wide">
+                    <div class="flex items-start"><i class="fa-solid fa-circle-check text-gold-400 mt-1 mr-3 text-xs"></i> <span>Zero-hidden cost structures including comprehensive premium insurance options.</span></div>
+                    <div class="flex items-start"><i class="fa-solid fa-circle-check text-gold-400 mt-1 mr-3 text-xs"></i> <span>Customized delivery metrics targeting elite hotels and helipads around Melbourne.</span></div>
+                    <div class="flex items-start"><i class="fa-solid fa-circle-check text-gold-400 mt-1 mr-3 text-xs"></i> <span>Flexible concierge allowances for extended premium interstate tours.</span></div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
+
+    <!-- CONCIERGE & BOOKING WORKFLOW PROCESS -->
+    <section id="concierge" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold block mb-2">Flawless Frictionless Integration</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-light text-white">The Hand-off System</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+            <!-- Step 1 -->
+            <div class="relative bg-[#0f111a]/50 p-8 border border-white/5 group hover:border-gold-400/30 transition-all duration-500">
+                <div class="absolute top-0 right-0 w-12 h-12 bg-gold-400/10 border border-gold-400/20 -mr-6 -mt-6 flex items-center justify-center rounded-full font-serif font-light text-gold-400">1</div>
+                <i class="fa-solid fa-headset text-3xl text-gold-400 mb-4 block"></i>
+                <h3 class="font-serif text-xl text-white mb-2">Concierge Consult</h3>
+                <p class="text-sm text-gray-400 font-light leading-relaxed">
+                    Speak with our elite mobility specialists who understand every nuance of high-value transportation. We listen, we deliver.
+                </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative bg-[#0f111a]/50 p-8 border border-white/5 group hover:border-gold-400/30 transition-all duration-500">
+                <div class="absolute top-0 right-0 w-12 h-12 bg-gold-400/10 border border-gold-400/20 -mr-6 -mt-6 flex items-center justify-center rounded-full font-serif font-light text-gold-400">2</div>
+                <i class="fa-solid fa-calendar-check text-3xl text-gold-400 mb-4 block"></i>
+                <h3 class="font-serif text-xl text-white mb-2">Seamless Booking</h3>
+                <p class="text-sm text-gray-400 font-light leading-relaxed">
+                    Secure your vehicle with instant confirmation. Multi-vehicle fleets, extended itineraries, and bespoke requirements welcomed.
+                </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative bg-[#0f111a]/50 p-8 border border-white/5 group hover:border-gold-400/30 transition-all duration-500">
+                <div class="absolute top-0 right-0 w-12 h-12 bg-gold-400/10 border border-gold-400/20 -mr-6 -mt-6 flex items-center justify-center rounded-full font-serif font-light text-gold-400">3</div>
+                <i class="fa-solid fa-car text-3xl text-gold-400 mb-4 block"></i>
+                <h3 class="font-serif text-xl text-white mb-2">White-Glove Handoff</h3>
+                <p class="text-sm text-gray-400 font-light leading-relaxed">
+                    Pristine vehicles delivered to your preferred location with professional briefing. Ready for your command, always.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="bg-[#0f111a] py-24 border-y border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-400 font-semibold block mb-2">Let's Connect</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-light text-white mb-4">Get in Touch with Prestige</h2>
+                <p class="text-gray-400 text-sm font-light">Our VIP concierge team responds within minutes, available 24/7 for your luxury mobility needs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="text-center">
+                    <i class="fa-solid fa-phone text-2xl text-gold-400 mb-3 block"></i>
+                    <p class="text-sm text-gray-400 mb-1">Direct Line</p>
+                    <a href="tel:+61390000000" class="text-white font-serif text-lg hover:text-gold-400 transition-colors">+61 3 9000 0000</a>
+                </div>
+                <div class="text-center">
+                    <i class="fa-solid fa-envelope text-2xl text-gold-400 mb-3 block"></i>
+                    <p class="text-sm text-gray-400 mb-1">Email Concierge</p>
+                    <a href="mailto:concierge@prestigerentals.com.au" class="text-white font-serif text-lg hover:text-gold-400 transition-colors">concierge@prestigerentals.com.au</a>
+                </div>
+                <div class="text-center">
+                    <i class="fa-solid fa-location-dot text-2xl text-gold-400 mb-3 block"></i>
+                    <p class="text-sm text-gray-400 mb-1">Location</p>
+                    <p class="text-white font-serif text-lg">Melbourne, Victoria</p>
+                </div>
+            </div>
+
+            <form class="bg-[#0b0c10]/50 p-8 border border-white/5 premium-blur rounded-lg space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Full Name" class="bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-gold-400 transition-colors">
+                    <input type="email" placeholder="Email Address" class="bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-gold-400 transition-colors">
+                </div>
+                <input type="text" placeholder="Preferred Vehicle" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-gold-400 transition-colors">
+                <textarea placeholder="Tell us about your requirements..." class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-gold-400 transition-colors resize-none h-32"></textarea>
+                <button type="submit" class="w-full bg-gold-400 text-black px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-white transition-all duration-300">
+                    Send Inquiry
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black/50 border-t border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <span class="font-serif text-lg text-white block mb-2">PRESTIGE</span>
+                    <p class="text-xs text-gray-500 font-light">Luxury Mercedes rentals crafted for Australia's most discerning clientele.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-white text-sm mb-4 uppercase tracking-wider">Quick Links</p>
+                    <ul class="space-y-2 text-xs text-gray-500">
+                        <li><a href="#fleet" class="hover:text-gold-400 transition-colors">The Fleet</a></li>
+                        <li><a href="#experience" class="hover:text-gold-400 transition-colors">Experience</a></li>
+                        <li><a href="#concierge" class="hover:text-gold-400 transition-colors">Concierge</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold text-white text-sm mb-4 uppercase tracking-wider">Legal</p>
+                    <ul class="space-y-2 text-xs text-gray-500">
+                        <li><a href="#" class="hover:text-gold-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition-colors">Terms & Conditions</a></li>
+                        <li><a href="#" class="hover:text-gold-400 transition-colors">Booking Conditions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold text-white text-sm mb-4 uppercase tracking-wider">Follow Us</p>
+                    <div class="flex space-x-4 text-xs text-gray-500">
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="hover:text-gold-400 transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 text-center text-xs text-gray-600">
+                <p>&copy; 2024 Prestige Rentals Melbourne. All rights reserved. | Powered by Premium Automotive Solutions</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOOKING MODAL (Alpine.js) -->
+    <div x-show="bookingModal" x-transition class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur">
+        <div class="bg-[#0f111a] border border-gold-400/30 max-w-md w-full p-8 relative">
+            <button @click="bookingModal = false" class="absolute top-4 right-4 text-white hover:text-gold-400 transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="font-serif text-2xl text-white mb-2">Book Your Escape</h3>
+            <p class="text-xs text-gold-400 uppercase tracking-widest font-semibold mb-6">
+                <span x-text="selectedCar"></span>
+            </p>
+            <form class="space-y-4">
+                <input type="text" placeholder="Full Name" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-gold-400 transition-colors">
+                <input type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-gold-400 transition-colors">
+                <input type="date" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white text-sm focus:outline-none focus:border-gold-400 transition-colors">
+                <textarea placeholder="Special Requests" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white placeholder-gray-600 text-sm focus:outline-none focus:border-gold-400 transition-colors resize-none h-24"></textarea>
+                <button type="submit" class="w-full bg-gold-400 text-black px-4 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-white transition-all duration-300">
+                    Confirm Booking
+                </button>
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>
