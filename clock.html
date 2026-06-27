@@ -1,466 +1,135 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Clock - Multi Timezone</title>
-    <!-- Premium Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Clock</title>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        orbitron: ['Orbitron', 'monospace'],
-                        mono: ['Roboto Mono', 'monospace'],
-                    },
-                    colors: {
-                        cyber: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            400: '#0ea5e9',
-                            500: '#0284c7',
-                            600: '#0369a1',
-                            700: '#075985',
-                            900: '#0c2340',
-                        },
-                        neon: {
-                            cyan: '#00ffff',
-                            purple: '#ff00ff',
-                            lime: '#00ff00',
-                            pink: '#ff0080',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, #0f0f1a, #000);
+    font-family: Arial, sans-serif;
+    color: white;
+}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* CLOCK CONTAINER */
+.clock-container {
+    text-align: center;
+    animation: fadeIn 2s ease-in;
+}
 
-        body {
-            background: linear-gradient(135deg, #0c2340 0%, #1a4d7a 50%, #0f3a6d 100%);
-            font-family: 'Roboto Mono', monospace;
-            color: #00ffff;
-            overflow-x: hidden;
-        }
+/* DIGITAL CLOCK */
+#digital {
+    font-size: 60px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    color: gold;
+    text-shadow: 0 0 20px gold;
+}
 
-        .glow-text {
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #0284c7, 0 0 30px #075985;
-        }
+/* ANALOG CLOCK */
+.clock {
+    width: 220px;
+    height: 220px;
+    border: 6px solid gold;
+    border-radius: 50%;
+    position: relative;
+    margin: auto;
+    box-shadow: 0 0 25px gold;
+}
 
-        .glow-cyan {
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1);
-        }
+/* HANDS */
+.hand {
+    position: absolute;
+    background: white;
+    transform-origin: bottom;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
-        .glow-purple {
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3), inset 0 0 20px rgba(255, 0, 255, 0.1);
-        }
+.hour {
+    width: 6px;
+    height: 60px;
+    background: #ffcc00;
+}
 
-        .glow-lime {
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3), inset 0 0 20px rgba(0, 255, 0, 0.1);
-        }
+.minute {
+    width: 4px;
+    height: 80px;
+}
 
-        .glow-pink {
-            box-shadow: 0 0 20px rgba(255, 0, 128, 0.3), inset 0 0 20px rgba(255, 0, 128, 0.1);
-        }
+.second {
+    width: 2px;
+    height: 90px;
+    background: red;
+}
 
-        .neon-border-cyan {
-            border: 2px solid #00ffff;
-            border-radius: 8px;
-        }
+/* CENTER DOT */
+.center {
+    width: 12px;
+    height: 12px;
+    background: gold;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
-        .neon-border-purple {
-            border: 2px solid #ff00ff;
-            border-radius: 8px;
-        }
-
-        .neon-border-lime {
-            border: 2px solid #00ff00;
-            border-radius: 8px;
-        }
-
-        .neon-border-pink {
-            border: 2px solid #ff0080;
-            border-radius: 8px;
-        }
-
-        .digital-display {
-            font-family: 'Orbitron', monospace;
-            font-weight: 900;
-            letter-spacing: 0.1em;
-            font-size: 3rem;
-        }
-
-        .pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% {
-                opacity: 1;
-                text-shadow: 0 0 10px #00ffff, 0 0 20px #0284c7;
-            }
-            50% {
-                opacity: 0.8;
-                text-shadow: 0 0 20px #00ffff, 0 0 30px #0284c7, 0 0 40px #075985;
-            }
-        }
-
-        .clock-card {
-            backdrop-filter: blur(20px);
-            background: rgba(12, 35, 64, 0.5);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .clock-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 255, 0.5);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-        }
-
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #075985;
-            transition: 0.4s;
-            border-radius: 24px;
-            border: 1px solid #0284c7;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 2px;
-            background-color: white;
-            transition: 0.4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #00ffff;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        .scanline {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .scanline::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            animation: flicker 0.15s infinite;
-        }
-
-        @keyframes flicker {
-            0% {
-                opacity: 0.97;
-            }
-            5% {
-                opacity: 0.9;
-            }
-            10% {
-                opacity: 0.99;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .orbit {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto;
-        }
-
-        .orbit::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: spin 20s linear infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+/* ANIMATION */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+</style>
 </head>
-<body class="min-h-screen">
 
-    <div x-data="clockApp()" class="min-h-screen py-12 px-4">
-        <!-- HEADER -->
-        <div class="max-w-7xl mx-auto mb-12 text-center">
-            <h1 class="text-5xl md:text-7xl font-bold font-orbitron mb-4 glow-text">
-                <i class="fas fa-clock mr-3"></i>DIGITAL CHRONOMETER
-            </h1>
-            <p class="text-cyan-400 text-lg md:text-xl font-mono">
-                Real-time clock across multiple time zones
-            </p>
-        </div>
+<body>
 
-        <!-- CONTROLS -->
-        <div class="max-w-7xl mx-auto mb-8 flex flex-wrap items-center justify-center gap-6 bg-opacity-30 bg-cyber-900 p-6 rounded-lg border border-cyan-500/30">
-            <div class="flex items-center gap-3">
-                <span class="text-cyan-400 font-mono text-sm">24-HOUR FORMAT</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" @change="toggle24Hour()" :checked="is24Hour">
-                    <span class="slider"></span>
-                </label>
-            </div>
+<div class="clock-container">
 
-            <div class="flex items-center gap-3">
-                <span class="text-cyan-400 font-mono text-sm">ADD TIMEZONE</span>
-                <select @change="addNewTimezone" class="bg-cyber-700 border border-cyan-500 text-cyan-400 px-4 py-2 rounded font-mono text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400">
-                    <option value="">Select timezone...</option>
-                    <option value="America/New_York">New York (EST)</option>
-                    <option value="America/Chicago">Chicago (CST)</option>
-                    <option value="America/Denver">Denver (MST)</option>
-                    <option value="America/Los_Angeles">Los Angeles (PST)</option>
-                    <option value="Europe/London">London (GMT)</option>
-                    <option value="Europe/Paris">Paris (CET)</option>
-                    <option value="Europe/Moscow">Moscow (MSK)</option>
-                    <option value="Asia/Dubai">Dubai (GST)</option>
-                    <option value="Asia/Kolkata">India (IST)</option>
-                    <option value="Asia/Bangkok">Bangkok (ICT)</option>
-                    <option value="Asia/Singapore">Singapore (SGT)</option>
-                    <option value="Asia/Hong_Kong">Hong Kong (HKT)</option>
-                    <option value="Asia/Tokyo">Tokyo (JST)</option>
-                    <option value="Australia/Sydney">Sydney (AEST)</option>
-                    <option value="Pacific/Auckland">Auckland (NZDT)</option>
-                </select>
-            </div>
+    <div id="digital">00:00:00</div>
 
-            <button @click="resetToDefault()" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white px-6 py-2 rounded font-mono text-sm font-bold transition-all">
-                <i class="fas fa-redo mr-2"></i>RESET
-            </button>
-        </div>
-
-        <!-- CLOCKS GRID -->
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <template x-for="(clock, index) in clocks" :key="index">
-                <div class="clock-card group">
-                    <!-- Clock Header -->
-                    <div class="flex items-center justify-between mb-6">
-                        <div>
-                            <h2 class="text-xl font-bold text-cyan-400 font-mono" x-text="clock.city"></h2>
-                            <p class="text-sm text-cyan-300/70 font-mono" x-text="clock.timezone"></p>
-                        </div>
-                        <button @click="removeClock(index)" class="text-red-400 hover:text-red-300 transition-colors" :style="{display: clocks.length > 1 ? 'block' : 'none'}">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-
-                    <!-- Digital Display -->
-                    <div class="mb-6 p-4 neon-border-cyan glow-cyan">
-                        <div class="digital-display text-center glow-text scanline" x-text="clock.time"></div>
-                    </div>
-
-                    <!-- Details -->
-                    <div class="space-y-2 text-sm font-mono">
-                        <div class="flex justify-between">
-                            <span class="text-cyan-300/70">DATE</span>
-                            <span class="text-cyan-400" x-text="clock.date"></span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-cyan-300/70">DAY</span>
-                            <span class="text-cyan-400" x-text="clock.day"></span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-cyan-300/70">UTC OFFSET</span>
-                            <span class="text-cyan-400" x-text="clock.offset"></span>
-                        </div>
-                    </div>
-
-                    <!-- Analog Progress Bar -->
-                    <div class="mt-6 pt-6 border-t border-cyan-500/30">
-                        <div class="text-xs text-cyan-300/70 mb-2 font-mono">TIME PROGRESS</div>
-                        <div class="w-full bg-cyber-700 rounded-full h-2 border border-cyan-500/30 overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-1000" :style="{ width: clock.progress + '%' }"></div>
-                        </div>
-                    </div>
-                </div>
-            </template>
-        </div>
-
-        <!-- FOOTER -->
-        <div class="max-w-7xl mx-auto mt-12 text-center border-t border-cyan-500/20 pt-8">
-            <p class="text-cyan-300/70 font-mono text-sm">
-                <i class="fas fa-sync-alt mr-2 animate-spin"></i>Auto-updating every second | Total Clocks: <span x-text="clocks.length" class="text-cyan-400 font-bold"></span>
-            </p>
-        </div>
+    <div class="clock">
+        <div class="hand hour" id="hour"></div>
+        <div class="hand minute" id="minute"></div>
+        <div class="hand second" id="second"></div>
+        <div class="center"></div>
     </div>
 
-    <script>
-        function clockApp() {
-            return {
-                is24Hour: true,
-                clocks: [],
+</div>
 
-                init() {
-                    this.resetToDefault();
-                    this.updateClocks();
-                    setInterval(() => this.updateClocks(), 1000);
-                },
+<script>
+function updateClock() {
+    const now = new Date();
 
-                resetToDefault() {
-                    this.clocks = [
-                        { city: 'NEW YORK', timezone: 'America/New_York' },
-                        { city: 'LONDON', timezone: 'Europe/London' },
-                        { city: 'TOKYO', timezone: 'Asia/Tokyo' },
-                        { city: 'SYDNEY', timezone: 'Australia/Sydney' },
-                        { city: 'DUBAI', timezone: 'Asia/Dubai' },
-                        { city: 'LOS ANGELES', timezone: 'America/Los_Angeles' }
-                    ].map(clock => ({
-                        ...clock,
-                        time: '00:00:00',
-                        date: '00/00/0000',
-                        day: '---',
-                        offset: '+00:00',
-                        progress: 0
-                    }));
-                    this.updateClocks();
-                },
+    let h = now.getHours();
+    let m = now.getMinutes();
+    let s = now.getSeconds();
 
-                addNewTimezone(event) {
-                    const timezone = event.target.value;
-                    if (!timezone) return;
+    // DIGITAL CLOCK
+    document.getElementById("digital").innerText =
+        `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
 
-                    const cityName = timezone.split('/').pop().toUpperCase();
-                    
-                    // Check if already exists
-                    if (this.clocks.some(c => c.timezone === timezone)) {
-                        alert('This timezone is already displayed!');
-                        event.target.value = '';
-                        return;
-                    }
+    // ANALOG CLOCK
+    let hDeg = (h % 12) * 30 + m * 0.5;
+    let mDeg = m * 6;
+    let sDeg = s * 6;
 
-                    this.clocks.push({
-                        city: cityName,
-                        timezone: timezone,
-                        time: '00:00:00',
-                        date: '00/00/0000',
-                        day: '---',
-                        offset: '+00:00',
-                        progress: 0
-                    });
+    document.getElementById("hour").style.transform = `translateX(-50%) rotate(${hDeg}deg)`;
+    document.getElementById("minute").style.transform = `translateX(-50%) rotate(${mDeg}deg)`;
+    document.getElementById("second").style.transform = `translateX(-50%) rotate(${sDeg}deg)`;
+}
 
-                    event.target.value = '';
-                    this.updateClocks();
-                },
-
-                removeClock(index) {
-                    this.clocks.splice(index, 1);
-                },
-
-                toggle24Hour() {
-                    this.is24Hour = !this.is24Hour;
-                    this.updateClocks();
-                },
-
-                updateClocks() {
-                    this.clocks.forEach(clock => {
-                        const now = new Date();
-                        const formatter = new Intl.DateTimeFormat('en-US', {
-                            timeZone: clock.timezone,
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            second: '2-digit',
-                            hour12: !this.is24Hour
-                        });
-
-                        const dateFormatter = new Intl.DateTimeFormat('en-US', {
-                            timeZone: clock.timezone,
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit'
-                        });
-
-                        const dayFormatter = new Intl.DateTimeFormat('en-US', {
-                            timeZone: clock.timezone,
-                            weekday: 'short'
-                        });
-
-                        clock.time = formatter.format(now);
-                        clock.date = dateFormatter.format(now);
-                        clock.day = dayFormatter.format(now);
-
-                        // Calculate UTC offset
-                        const utcDate = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }));
-                        const tzDate = new Date(now.toLocaleString('en-US', { timeZone: clock.timezone }));
-                        const diff = (tzDate - utcDate) / (1000 * 60 * 60);
-                        const sign = diff >= 0 ? '+' : '';
-                        clock.offset = `${sign}${diff.toString().padStart(2, '0')}:00`;
-
-                        // Calculate progress through the day (percentage)
-                        const tzTime = new Date(now.toLocaleString('en-US', { timeZone: clock.timezone }));
-                        const secondsInDay = tzTime.getHours() * 3600 + tzTime.getMinutes() * 60 + tzTime.getSeconds();
-                        clock.progress = (secondsInDay / 86400) * 100;
-                    });
-                }
-            };
-        }
-    </script>
+setInterval(updateClock, 1000);
+updateClock();
+</script>
 
 </body>
 </html>
