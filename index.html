@@ -3,187 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prestige Luxury Rentals</title>
+<title>Prestige Rentals</title>
 
 <style>
-body {
-    margin: 0;
+:root{
+    --black:#0b0b0f;
+    --charcoal:#14161c;
+    --silver:#c0c0c0;
+    --white:#ffffff;
+    --accent:#d4af37;
+}
+
+body{
+    margin:0;
     font-family: Arial, sans-serif;
-    background: #0b0b0f;
-    color: white;
+    background: var(--black);
+    color: var(--white);
 }
 
 /* HERO */
-.hero {
+.hero{
     height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
-    url('https://images.unsplash.com/photo-1619767886558-efdc259cde1a') center/cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    animation: fadeIn 2s ease-in;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+    url('https://images.unsplash.com/photo-1503376780353-7e6692767b70') center/cover;
+    animation: fadeIn 2s ease;
 }
 
-.hero h1 {
-    font-size: 50px;
-    letter-spacing: 2px;
+.hero h1{
+    font-size:60px;
+    letter-spacing:3px;
+    color: var(--silver);
 }
 
-.hero p {
-    font-size: 18px;
-    opacity: 0.8;
+.hero p{
+    color: var(--silver);
 }
 
-.btn {
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: gold;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
+/* BUTTONS */
+.btn{
+    margin:10px;
+    padding:12px 20px;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    background: var(--accent);
+    color:black;
+    transition:0.3s;
+    border-radius:5px;
 }
 
-.btn:hover {
-    transform: scale(1.1);
+.btn:hover{
+    transform:scale(1.1);
 }
 
-/* CAR SECTION */
-.section {
-    padding: 60px 10%;
+/* CONTACT BAR */
+.contact{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-top:20px;
 }
 
-.section h2 {
-    text-align: center;
-    margin-bottom: 40px;
+/* SECTION */
+.section{
+    padding:60px 8%;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+h2{
+    text-align:center;
+    color: var(--silver);
+    margin-bottom:40px;
 }
 
-.card {
-    background: #14141c;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: 0.4s;
-    transform: translateY(20px);
-    opacity: 0;
-    animation: slideUp 1s forwards;
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap:20px;
 }
 
-.card:hover {
-    transform: scale(1.05);
+/* CARD */
+.card{
+    background: var(--charcoal);
+    padding:20px;
+    border-radius:12px;
+    transition:0.4s;
+    border:1px solid rgba(255,255,255,0.1);
 }
 
-.card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+.card:hover{
+    transform: translateY(-8px);
+    border-color: var(--accent);
 }
 
-.card-content {
-    padding: 15px;
-}
-
-.price {
-    color: gold;
-    font-weight: bold;
+.price{
+    color: var(--accent);
+    font-weight:bold;
 }
 
 /* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #000;
-    margin-top: 40px;
+footer{
+    text-align:center;
+    padding:20px;
+    color: var(--silver);
+    background:#000;
 }
 
-/* ANIMATIONS */
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* ANIMATION */
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
 }
 </style>
 </head>
 
 <body>
 
+<!-- HERO -->
 <div class="hero">
-    <h1>Prestige Luxury Rentals</h1>
-    <p>Drive your dream car today</p>
-    <button class="btn">Explore Cars</button>
-</div>
+    <h1>Prestige Rentals</h1>
+    <p>Luxury Cars • Yachts • Helicopters</p>
 
-<div class="section">
-    <h2>Our Fleet</h2>
-
-    <div class="grid">
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2" alt="Car">
-            <div class="card-content">
-                <h3>Mercedes G-Wagon</h3>
-                <p class="price">$1,800 / day</p>
-                <p>Luxury SUV with 4x4 performance.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1549921296-3a6b0e2f6f25" alt="Car">
-            <div class="card-content">
-                <h3>Lamborghini Urus</h3>
-                <p class="price">$2,200 / day</p>
-                <p>Super SUV with extreme performance.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d" alt="Car">
-            <div class="card-content">
-                <h3>Rolls Royce Ghost</h3>
-                <p class="price">$2,500 / day</p>
-                <p>Ultimate luxury and comfort.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1616788494707-ec28f08d05a3" alt="Car">
-            <div class="card-content">
-                <h3>Ferrari F8</h3>
-                <p class="price">$3,000 / day</p>
-                <p>Exotic supercar performance.</p>
-            </div>
-        </div>
-
+    <div class="contact">
+        <a href="mailto:info@prestige.rentals"><button class="btn">Email Us</button></a>
+        <a href="https://wa.me/61414000111"><button class="btn">WhatsApp</button></a>
+        <a href="https://instagram.com/prestigerentals"><button class="btn">Instagram</button></a>
     </div>
 </div>
 
-<footer>
-    <p>© 2026 Prestige Luxury Rentals | All Rights Reserved</p>
-</footer>
+<!-- CARS -->
+<div class="section">
+<h2>Luxury Cars</h2>
+<div class="grid">
 
-<script>
-// smooth scroll button
-document.querySelector(".btn").addEventListener("click", () => {
-    document.querySelector(".section").scrollIntoView({ behavior: "smooth" });
-});
-</script>
+<div class="card"><h3>Ferrari 488 GTB</h3><p class="price">$2,600 / day</p><p>Tasmania (Hobart)</p></div>
+<div class="card"><h3>Lamborghini Huracán LP610-4</h3><p class="price">$2,600 / day</p><p>Tasmania (Hobart)</p></div>
+<div class="card"><h3>Mercedes-AMG C63 Coupe</h3><p class="price">$700 / day</p><p>Tasmania (Hobart)</p></div>
+<div class="card"><h3>BMW M3 Sedan</h3><p class="price">Price on request</p><p>Tasmania (Hobart)</p></div>
+<div class="card"><h3>Range Rover Sport</h3><p class="price">$700 / day</p><p>Tasmania (Hobart)</p></div>
+<div class="card"><h3>Porsche Boxster / Cayman</h3><p class="price">$1,200 / day</p><p>Tasmania (Hobart)</p></div>
+
+</div>
+</div>
+
+<!-- YACHTS -->
+<div class="section">
+<h2>Luxury Yachts & Boats</h2>
+<div class="grid">
+
+<div class="card"><h3>Aki Yacht</h3><p class="price">$3,267</p><p>Brisbane & Gold Coast</p></div>
+<div class="card"><h3>Aquabay Yacht</h3><p class="price">$5,000</p><p>Sydney & Byron Bay</p></div>
+<div class="card"><h3>Como Yacht</h3><p class="price">$990/hr</p><p>Sydney</p></div>
+<div class="card"><h3>Gravity Yacht</h3><p class="price">$1,350/hr</p><p>Sydney</p></div>
+<div class="card"><h3>MV Pearl</h3><p class="price">$2,500</p><p>Melbourne</p></div>
+<div class="card"><h3>Paradise Superyacht</h3><p class="price">$36,000</p><p>Perth</p></div>
+<div class="card"><h3>Royal Prestige</h3><p class="price">$2,000</p><p>Melbourne</p></div>
+<div class="card"><h3>Queen Royal Yacht</h3><p class="price">$3,000</p><p>Melbourne</p></div>
+
+</div>
+</div>
+
+<!-- HELICOPTERS -->
+<div class="section">
+<h2>Helicopter Tours</h2>
+<div class="grid">
+
+<div class="card"><h3>Bell Longranger Tour</h3><p class="price">$220 / PP</p><p>Essendon Airport</p></div>
+<div class="card"><h3>Robinson R44</h3><p class="price">Rates on request</p><p>Victoria</p></div>
+
+</div>
+</div>
+
+<footer>
+© 2026 Prestige Rentals | Black Luxury Experience
+</footer>
 
 </body>
 </html>
