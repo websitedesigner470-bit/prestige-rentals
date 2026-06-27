@@ -1,366 +1,189 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prestige Rentals | Luxury Mercedes Rental Melbourne</title>
-    <!-- Premium Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 50%, #ffffff 100%);
-            min-height: 100vh;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prestige Luxury Rentals</title>
 
-        .section-grey {
-            background: linear-gradient(135deg, #f0f0f0 0%, #e5e5e5 100%);
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b0b0f;
+    color: white;
+}
 
-        .section-white {
-            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
-        }
+/* HERO */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+    url('https://images.unsplash.com/photo-1619767886558-efdc259cde1a') center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 2s ease-in;
+}
 
-        .shadow-luxury {
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+.hero h1 {
+    font-size: 50px;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: gold;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+/* CAR SECTION */
+.section {
+    padding: 60px 10%;
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #14141c;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.4s;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 1s forwards;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.price {
+    color: gold;
+    font-weight: bold;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #000;
+    margin-top: 40px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
 </head>
-<body class="font-sans" x-data="{ mobileMenu: false, bookingModal: false, selectedCar: '' }">
 
-    <!-- HEADER -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <!-- Brand -->
-            <a href="#" class="flex items-center space-x-2">
-                <i class="fas fa-car text-2xl text-gray-800"></i>
-                <span class="text-2xl font-bold font-serif text-gray-900">Prestige Rentals</span>
-            </a>
+<body>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-700">
-                <a href="#fleet" class="hover:text-gray-900 transition">Our Fleet</a>
-                <a href="#why" class="hover:text-gray-900 transition">Why Us</a>
-                <a href="#contact" class="hover:text-gray-900 transition">Contact</a>
-            </nav>
+<div class="hero">
+    <h1>Prestige Luxury Rentals</h1>
+    <p>Drive your dream car today</p>
+    <button class="btn">Explore Cars</button>
+</div>
 
-            <!-- CTA -->
-            <div class="hidden md:flex items-center space-x-4">
-                <a href="https://wa.me/61390000000?text=Hi%20I%20want%20to%20rent%20a%20luxury%20car" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition flex items-center space-x-2">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>WhatsApp</span>
-                </a>
-            </div>
+<div class="section">
+    <h2>Our Fleet</h2>
 
-            <!-- Mobile Menu -->
-            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-gray-800">
-                <i class="fas" :class="mobileMenu ? 'fa-times' : 'fa-bars'" style="font-size: 1.5rem;"></i>
-            </button>
-        </div>
+    <div class="grid">
 
-        <!-- Mobile Menu -->
-        <div x-show="mobileMenu" x-transition class="md:hidden bg-white border-t border-gray-200 px-6 py-4 space-y-3">
-            <a href="#fleet" @click="mobileMenu = false" class="block text-gray-700 hover:text-gray-900 font-medium">Our Fleet</a>
-            <a href="#why" @click="mobileMenu = false" class="block text-gray-700 hover:text-gray-900 font-medium">Why Us</a>
-            <a href="#contact" @click="mobileMenu = false" class="block text-gray-700 hover:text-gray-900 font-medium">Contact</a>
-            <a href="https://wa.me/61390000000?text=Hi%20I%20want%20to%20rent%20a%20luxury%20car" target="_blank" class="block bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition text-center">
-                <i class="fab fa-whatsapp mr-2"></i>WhatsApp
-            </a>
-        </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="section-grey py-20 md:py-32">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-gray-900 mb-6">
-                    Luxury Mercedes Rentals
-                </h1>
-                <p class="text-lg text-gray-700 mb-8">
-                    Experience premium luxury with our exclusive fleet of Mercedes-Benz vehicles. Perfect for business trips, special occasions, and unforgettable journeys.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#fleet" class="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-lg font-semibold transition text-center">
-                        <i class="fas fa-car mr-2"></i>View Fleet
-                    </a>
-                    <a href="https://wa.me/61390000000?text=Hi%20I%20want%20to%20rent%20a%20luxury%20car" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold transition text-center">
-                        <i class="fab fa-whatsapp mr-2"></i>WhatsApp Us
-                    </a>
-                </div>
-            </div>
-            <div class="aspect-video rounded-xl overflow-hidden shadow-luxury">
-                <img src="https://images.unsplash.com/photo-1617654112368-307921291f31?auto=format&fit=crop&q=80&w=800" alt="Luxury Mercedes" class="w-full h-full object-cover">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2" alt="Car">
+            <div class="card-content">
+                <h3>Mercedes G-Wagon</h3>
+                <p class="price">$1,800 / day</p>
+                <p>Luxury SUV with 4x4 performance.</p>
             </div>
         </div>
-    </section>
 
-    <!-- FLEET SECTION -->
-    <section id="fleet" class="section-white py-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold font-serif text-gray-900 mb-4">Our Premium Fleet</h2>
-                <p class="text-lg text-gray-700">Hand-picked Mercedes-Benz vehicles for your comfort and style</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Car 1: G-Class -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-luxury hover:shadow-2xl transition">
-                    <div class="aspect-video overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&q=80&w=500" alt="Mercedes G-Class" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mercedes-AMG G 63</h3>
-                        <p class="text-gray-600 mb-4">Iconic SUV with unmatched power and presence</p>
-                        <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
-                            <div class="bg-gray-100 p-3 rounded text-center">
-                                <div class="font-bold text-gray-900">577 HP</div>
-                                <div class="text-gray-600 text-xs">Power</div>
-                            </div>
-                            <div class="bg-gray-100 p-3 rounded text-center">
-                                <div class="font-bold text-gray-900">5 Seats</div>
-                                <div class="text-gray-600 text-xs">Capacity</div>
-                            </div>
-                            <div class="bg-gray-100 p-3 rounded text-center">
-                                <div class="font-bold text-gray-900">4.5s</div>
-                                <div class="text-gray-600 text-xs">0-100 km/h</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-gray-900">$950<span class="text-sm text-gray-600">/day</span></span>
-                        </div>
-                        <a href="https://wa.me/61390000000?text=Hi%20I%20want%20to%20rent%20the%20Mercedes%20G63" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition text-center">
-                            <i class="fab fa-whatsapp mr-2"></i>Book on WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Car 2: S-Class -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-luxury hover:shadow-2xl transition">
-                    <div class="aspect-video overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1611818913854-7b97cff8c2c8?auto=format&fit=crop&q=80&w=500" alt="Mercedes S-Class" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mercedes-Benz S-Class</h3>
-                        <p class="text-gray-600 mb-4">Ultimate luxury sedan with supreme comfort</p>
-                        <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
-                            <div class="bg-gray-100 p-3 rounded text-center">
-                                <div class="font-bold text-gray-900">456 HP</div>
-                                <div class="text-gray-600 text-xs">Power</div>
-                            </div>
-                            <div class="bg-gray-100 p-3 rounded text-center">
-                                <div class="font-bold text-gray-900">5 Seats</div>
-                                <div class="text-gray-600 text-xs">Capacity</div>
-                            </div>
-                            <div class="bg-gray-100 p-3 rounded text-center">
-                                <div class="font-bold text-gray-900">4.6s</div>
-                                <div class="text-gray-600 text-xs">0-100 km/h</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-gray-900">$750<span class="text-sm text-gray-600">/day</span></span>
-                        </div>
-                        <a href="https://wa.me/61390000000?text=Hi%20I%20want%20to%20rent%20the%20Mercedes%20S-Class" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition text-center">
-                            <i class="fab fa-whatsapp mr-2"></i>Book on WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Car 3: AMG GT -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-luxury hover:shadow-2xl transition">
-                    <div class="aspect-video overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=500" alt="Mercedes AMG GT" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mercedes-AMG GT</h3>
-                        <p class="text-gray-600 mb-4">High-performance sports coupe for thrill seekers</p>
-                        <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
-                            <div class="bg-gray-100 p-3 rounded text-center">
-                                <div class="font-bold text-gray-900">585 HP</div>
-                                <div class="text-gray-600 text-xs">Power</div>
-                            </div>
-                            <div class="bg-gray-100 p-3 rounded text-center">
-                                <div class="font-bold text-gray-900">2+2 Seats</div>
-                                <div class="text-gray-600 text-xs">Capacity</div>
-                            </div>
-                            <div class="bg-gray-100 p-3 rounded text-center">
-                                <div class="font-bold text-gray-900">3.7s</div>
-                                <div class="text-gray-600 text-xs">0-100 km/h</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-gray-900">$1,200<span class="text-sm text-gray-600">/day</span></span>
-                        </div>
-                        <a href="https://wa.me/61390000000?text=Hi%20I%20want%20to%20rent%20the%20Mercedes%20AMG%20GT" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-semibold transition text-center">
-                            <i class="fab fa-whatsapp mr-2"></i>Book on WhatsApp
-                        </a>
-                    </div>
-                </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1549921296-3a6b0e2f6f25" alt="Car">
+            <div class="card-content">
+                <h3>Lamborghini Urus</h3>
+                <p class="price">$2,200 / day</p>
+                <p>Super SUV with extreme performance.</p>
             </div>
         </div>
-    </section>
 
-    <!-- WHY US SECTION -->
-    <section id="why" class="section-grey py-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold font-serif text-gray-900 mb-4">Why Choose Prestige Rentals?</h2>
-                <p class="text-lg text-gray-700">Premium service at every step of your journey</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-luxury text-center">
-                    <i class="fas fa-crown text-4xl text-gray-900 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Premium Fleet</h3>
-                    <p class="text-gray-600">Exclusively maintained luxury vehicles</p>
-                </div>
-
-                <div class="bg-white p-8 rounded-xl shadow-luxury text-center">
-                    <i class="fas fa-headset text-4xl text-gray-900 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">24/7 Support</h3>
-                    <p class="text-gray-600">Round-the-clock customer assistance</p>
-                </div>
-
-                <div class="bg-white p-8 rounded-xl shadow-luxury text-center">
-                    <i class="fas fa-shield-alt text-4xl text-gray-900 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Insured</h3>
-                    <p class="text-gray-600">Comprehensive insurance coverage included</p>
-                </div>
-
-                <div class="bg-white p-8 rounded-xl shadow-luxury text-center">
-                    <i class="fas fa-map-location-dot text-4xl text-gray-900 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Free Delivery</h3>
-                    <p class="text-gray-600">Vehicle delivery to your preferred location</p>
-                </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d" alt="Car">
+            <div class="card-content">
+                <h3>Rolls Royce Ghost</h3>
+                <p class="price">$2,500 / day</p>
+                <p>Ultimate luxury and comfort.</p>
             </div>
         </div>
-    </section>
 
-    <!-- INTERIOR SHOWCASE -->
-    <section class="section-white py-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold font-serif text-gray-900 mb-12 text-center">Luxury Interiors</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="rounded-xl overflow-hidden shadow-luxury h-96">
-                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800" alt="Premium Interior" class="w-full h-full object-cover">
-                </div>
-                <div class="rounded-xl overflow-hidden shadow-luxury h-96">
-                    <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800" alt="Leather Seats" class="w-full h-full object-cover">
-                </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1616788494707-ec28f08d05a3" alt="Car">
+            <div class="card-content">
+                <h3>Ferrari F8</h3>
+                <p class="price">$3,000 / day</p>
+                <p>Exotic supercar performance.</p>
             </div>
         </div>
-    </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="section-grey py-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold font-serif text-gray-900 mb-4">Get In Touch</h2>
-                <p class="text-lg text-gray-700">Ready to rent your dream car?</p>
-            </div>
+    </div>
+</div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <!-- Phone -->
-                <div class="bg-white p-8 rounded-xl shadow-luxury text-center">
-                    <i class="fas fa-phone text-4xl text-gray-900 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Call Us</h3>
-                    <a href="tel:+61390000000" class="text-gray-600 hover:text-gray-900 font-semibold">
-                        +61 3 9000 0000
-                    </a>
-                </div>
+<footer>
+    <p>© 2026 Prestige Luxury Rentals | All Rights Reserved</p>
+</footer>
 
-                <!-- WhatsApp -->
-                <div class="bg-white p-8 rounded-xl shadow-luxury text-center">
-                    <i class="fab fa-whatsapp text-4xl text-green-500 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">WhatsApp</h3>
-                    <a href="https://wa.me/61390000000?text=Hi%20I%20want%20to%20rent%20a%20luxury%20car" target="_blank" class="text-green-500 hover:text-green-600 font-semibold">
-                        Chat on WhatsApp
-                    </a>
-                </div>
-
-                <!-- Email -->
-                <div class="bg-white p-8 rounded-xl shadow-luxury text-center">
-                    <i class="fas fa-envelope text-4xl text-gray-900 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Email</h3>
-                    <a href="mailto:info@prestigerentals.com.au" class="text-gray-600 hover:text-gray-900 font-semibold">
-                        info@prestigerentals.com.au
-                    </a>
-                </div>
-            </div>
-
-            <!-- Contact Form -->
-            <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-luxury">
-                <form class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900">
-                        <input type="email" placeholder="Your Email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900">
-                    </div>
-                    <input type="text" placeholder="Vehicle of Interest" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900">
-                    <textarea placeholder="Your Message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900"></textarea>
-                    <button type="submit" class="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-lg font-semibold transition">
-                        Send Message
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Prestige Rentals</h3>
-                    <p class="text-gray-400">Luxury Mercedes rentals for discerning travelers</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#fleet" class="hover:text-white transition">Our Fleet</a></li>
-                        <li><a href="#why" class="hover:text-white transition">Why Us</a></li>
-                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Contact</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="tel:+61390000000" class="hover:text-white transition">+61 3 9000 0000</a></li>
-                        <li><a href="https://wa.me/61390000000" target="_blank" class="hover:text-white transition">WhatsApp</a></li>
-                        <li><a href="mailto:info@prestigerentals.com.au" class="hover:text-white transition">Email</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Follow Us</h4>
-                    <div class="flex space-x-4 text-gray-400">
-                        <a href="#" class="hover:text-white transition"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="hover:text-white transition"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 Prestige Rentals. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+<script>
+// smooth scroll button
+document.querySelector(".btn").addEventListener("click", () => {
+    document.querySelector(".section").scrollIntoView({ behavior: "smooth" });
+});
+</script>
 
 </body>
 </html>
